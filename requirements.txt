@@ -1,5 +1,5 @@
-python-telegram-bot
+pyTelegramBotAPI
 pymongo
-certifi
 requests
+certifi
 Flask
