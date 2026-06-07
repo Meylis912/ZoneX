@@ -46,7 +46,7 @@ except Exception as e:
 
 # Flask Keep-Alive for Render
 app = Flask(__name__)
-RENDER_URL = os.getenv("RENDER_URL", "https://relaxpremlisponsor.onrender.com")
+RENDER_URL = os.getenv("RENDER_URL", "https://zonex-iugv.onrender.com")
 
 @app.route("/")
 def home():
