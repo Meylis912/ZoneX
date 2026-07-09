@@ -1,6 +1,0 @@
-pyTelegramBotAPI
-aiogram
-pymongo
-requests
-certifi
-Flask
