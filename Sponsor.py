@@ -29,7 +29,7 @@ BOT_TOKEN = '7941701421:AAGQXzwXOKu24zlt7pZLDz5eL8CYjSd8Mhs'
 ADMIN_IDS = [7523674506]
 
 # MongoDB
-MONGO_URL = "mongodb+srv://mergenowlyagulyyew41_db_user:<db_password>@cluster1.l8z8gll.mongodb.net/?appName=Cluster1"
+MONGO_URL = "mongodb+srv://mergenowlyagulyyew41_db_user:ZvZhOKOAF6ZMRbHX@cluster1.l8z8gll.mongodb.net/?appName=Cluster1"
 
 # TGRASS
 TGRASS_API_KEY = "02f064af71be4a1d915ddefb098d92fc"
