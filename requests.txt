@@ -1,5 +1,0 @@
-requests
-httpx
-aiogram
-motor
-aiohttp
