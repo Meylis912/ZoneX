@@ -26,7 +26,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 # Botuň sazlamalary
 BOT_TOKEN = '7941701421:AAGQXzwXOKu24zlt7pZLDz5eL8CYjSd8Mhs'
-ADMIN_IDS = [7523674506]
+ADMIN_IDS = [7523674506, 8407003010]
 
 # MongoDB
 MONGO_URL = "mongodb+srv://mergenowlyagulyyew41_db_user:ZvZhOKOAF6ZMRbHX@cluster1.l8z8gll.mongodb.net/?appName=Cluster1"
