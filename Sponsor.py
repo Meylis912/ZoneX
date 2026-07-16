@@ -351,6 +351,21 @@ async def set_tgrass_enabled(enabled):
 async def get_stats():
     total = await col_users.count_documents({})
     return total, 0, 0
+    async def get_new_users_today():
+    today_start = datetime.datetime.utcnow().strftime("%Y-%m-%d 00:00:00")
+    return await col_users.count_documents({"join_date": {"$gte": today_start}})
+
+async def get_vpn_stats():
+    now = datetime.datetime.utcnow()
+    today_start = now.strftime("%Y-%m-%d 00:00:00")
+    week_start = (now - datetime.timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+    month_start = (now - datetime.timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+
+    today_count = await col_users.count_documents({"vpn_taken_date": {"$gte": today_start}})
+    week_count = await col_users.count_documents({"vpn_taken_date": {"$gte": week_start}})
+    month_count = await col_users.count_documents({"vpn_taken_date": {"$gte": month_start}})
+
+    return today_count, week_count, month_count
 
 # ================= TGRASS FUNKSIÝALARY (Async) =================
 
@@ -635,6 +650,10 @@ async def check_sub_callback(call: CallbackQuery):
         await call.answer(text="✅ Вы подписались на все каналы!", show_alert=True)
         vpn_code = await get_setting('vpn_code')
         if vpn_code:
+            await col_users.update_one(
+                {"user_id": user_id},
+                {"$set": {"vpn_taken_date": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")}}
+            )
             await call.message.answer(
                 f"<tg-emoji emoji-id=\"{EMOJI_IDS['vpn']}\">✔️</tg-emoji> <b>Ваш VPN код:</b> <code>{vpn_code}</code>"
             )
@@ -1043,13 +1062,19 @@ async def show_stats(call: CallbackQuery):
     sponsors = await get_sponsors()
     addlists = await get_addlists()
     tgrass_enabled = await get_tgrass_enabled()
+    new_today = await get_new_users_today()
+    vpn_today, vpn_week, vpn_month = await get_vpn_stats()
     
     text = (
         f"<tg-emoji emoji-id=\"{EMOJI_IDS['stats']}\">📊</tg-emoji> <b>Статистика бота</b>\n\n"
         f"👥 Пользователей: {len(users)}\n"
+        f"🆕 Новых сегодня: {new_today}\n"
         f"📢 Спонсоров: {len(sponsors)}\n"
         f"📋 Addlist: {len(addlists)}\n"
-        f"⚙️ TGrass: {'✅ Включен' if tgrass_enabled else '❌ Выключен'}\n"
+        f"⚙️ TGrass: {'✅ Включен' if tgrass_enabled else '❌ Выключен'}\n\n"
+        f"🔐 VPN получили сегодня: {vpn_today}\n"
+        f"🔐 VPN получили за неделю: {vpn_week}\n"
+        f"🔐 VPN получили за месяц: {vpn_month}\n"
     )
     
     builder = InlineKeyboardBuilder()
