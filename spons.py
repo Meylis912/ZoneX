@@ -1467,7 +1467,7 @@ from flask import Flask
 flask_app = Flask(__name__)
 
 # Kendi Render URL'inizi buraya yazın (self-ping için)
-RENDER_URL = "https://zonex-1-kanal.onrender.com"
+RENDER_URL = "https://zonex-j85z.onrender.com"
 
 @flask_app.route("/")
 def home():
