@@ -25,7 +25,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # Botuň sazlamalary
-BOT_TOKEN = os.getenv("BOT_TOKEN", "7941701421:AAFmmKySa0VfYXYOT1lncI2yWkuGwqJoFMU")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "7941701421:AAH3LDPxDHcEuugStk1DQgRpMAAQEIsCJp0")
 ADMIN_IDS = [int(x) for x in os.getenv("ADMIN_IDS", "7523674506,8407003010").split(",") if x.strip()]
 
 # MongoDB
